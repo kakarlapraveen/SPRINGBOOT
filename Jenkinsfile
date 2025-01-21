@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_IMAGE = ''  
+        DOCKER_IMAGE = 'punit1/project'  
         DOCKER_TAG = 'latest'
         CREDENTIAL = 'docker_credential'         
     }
@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'main', url: ''
+                git branch: 'main', url: 'https://github.com/punit-appi/SPRINGBOOT.git'
             }
         }
 
