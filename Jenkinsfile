@@ -2,28 +2,26 @@ pipeline {
     agent any
 
     tools {
-        maven 'maven'  // Ensure Maven is configured in Jenkins with this label
+        maven 'maven' // Ensure Maven is configured in Jenkins with this label
     }
 
     environment {
-        DOCKER_IMAGE = 'punit1/project'       // Docker image name
-        DOCKER_USERNAME = 'punit1'
-        DOCKER_PASSWORD = 'Punit@1804'
-        DOCKER_TAG = 'latest'                // Docker tag
-        CREDENTIAL = 'docker-hub-credentials' // Jenkins credentials ID for DockerHub
+        DOCKER_IMAGE = 'punit1/project'
+        DOCKER_TAG = 'latest'
+        CREDENTIAL = 'docker-hub-credentials'
     }
 
     stages {
         stage('Clone Repo') {
             steps {
-                echo 'Cloning the Git repository...'
+                echo 'Cloning the repository...'
                 git branch: 'main', url: 'https://github.com/punit-appi/SPRINGBOOT.git'
             }
         }
 
         stage('Build jar') {
             steps {
-                echo 'Building the JAR file using Maven...'
+                echo 'Building the JAR file...'
                 sh 'mvn clean package'
             }
         }
@@ -33,21 +31,18 @@ pipeline {
                 echo 'Cleaning up Docker images and containers...'
                 script {
                     sh '''
-                        # Remove the running container (if it exists)
                         docker rm -f my-container || echo "No containers to remove."
-                        
-                        # Remove dangling images
                         docker rmi -f $(docker images -q -f dangling=true) || echo "No dangling images to remove."
                     '''
                 }
             }
         }
 
-        stage('Docker Login to Server') {
+        stage('Docker Login') {
             steps {
                 echo 'Logging in to DockerHub...'
                 script {
-                    withCredentials([usernamePassword(credentialsId: CREDENTIAL, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh '''
                             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
                         '''
@@ -67,7 +62,7 @@ pipeline {
             steps {
                 echo 'Pushing the Docker image to DockerHub...'
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', CREDENTIAL) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
                     }
                 }
@@ -79,6 +74,12 @@ pipeline {
                 echo 'Running the Docker container...'
                 sh "docker run -it -d --name my-container -p 8081:8081 ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline execution completed.'
         }
     }
 }
