@@ -31,7 +31,7 @@ pipeline {
                     sh '''
                         CONTAINERS=$(docker ps -aq)
                         if [ -n "$CONTAINERS" ]; then
-                            docker rm -f $CONTAINERS
+                            docker rm -f my-container
                         else
                             echo "No containers to remove."
                         fi
