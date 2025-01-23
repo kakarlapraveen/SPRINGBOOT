@@ -1,3 +1,10 @@
+# project Jenkins
+
+![Screenshot 2025-01-23 170040](https://github.com/user-attachments/assets/4371a47e-5ade-42bc-89ff-be1c96ed9b10)
+
+
+
+
 ## admin login
 
 - username: admin
