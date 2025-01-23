@@ -60,7 +60,7 @@ pipeline {
            steps {
                  script {
                      // Log in to DockerHub and push the Docker image
-                     docker.withRegistry('https://registry.hub.docker.com', CREDENTIAL) {
+                     docker.withRegistry('https://registry.hub.docker.com', 'CREDENTIAL') {
                          sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
                      }
                  }
