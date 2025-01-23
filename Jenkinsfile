@@ -8,7 +8,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'punit1/project'  
         DOCKER_TAG = 'latest'
-        CREDENTIAL = 'docker_credential'         
+        CREDENTIAL = 'docker-hub-credentials'         
     }
 
     stages {
