@@ -7,6 +7,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'punit1/project'       // Docker image name
+        DOCKER_USERNAME = 'punit1'
+        DOCKER_PASSWORD = 'Punit@1804'
         DOCKER_TAG = 'latest'                // Docker tag
         CREDENTIAL = 'docker-hub-credentials' // Jenkins credentials ID for DockerHub
     }
