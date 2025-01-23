@@ -1,6 +1,11 @@
 # project Jenkins
 
 ![Screenshot 2025-01-23 170040](https://github.com/user-attachments/assets/4371a47e-5ade-42bc-89ff-be1c96ed9b10)
+![Screenshot 2025-01-23 170051](https://github.com/user-attachments/assets/52930a3a-1852-43ad-a056-5df6950ef7d2)
+![Screenshot 2025-01-23 170101](https://github.com/user-attachments/assets/5f16221e-2960-4523-a50d-d42b70f36b35)
+![Screenshot 2025-01-23 170136](https://github.com/user-attachments/assets/c57c25ec-2bd1-4cfe-9629-482ee8d10d8d)
+
+
 
 
 
