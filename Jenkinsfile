@@ -6,7 +6,9 @@ pipeline {
     }
 
     environment {
-        DOCKER_IMAGE = 'punit1/project'  
+        DOCKER_IMAGE = 'punit1/project'
+        DOCKER_USERNAME = 'punit1'
+        DOCKER_PASSWORD = 'Punit@1804'
         DOCKER_TAG = 'latest'
         CREDENTIAL = 'docker-hub-credentials'         
     }
