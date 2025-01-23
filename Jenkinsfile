@@ -56,16 +56,16 @@ pipeline {
             }
         }
 
-        // stage('Push Docker Image') {
-        //     steps {
-        //         script {
-        //             // Log in to DockerHub and push the Docker image
-        //             docker.withRegistry('https://registry.hub.docker.com', CREDENTIAL) {
-        //                 sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Push Docker Image') {
+           steps {
+                 script {
+                     // Log in to DockerHub and push the Docker image
+                     docker.withRegistry('https://registry.hub.docker.com', CREDENTIAL) {
+                         sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                     }
+                 }
+             }
+         }
         
         
         stage('Run the Container') {
