@@ -38,18 +38,18 @@ pipeline {
             }
         }
 
-        stage('Docker Login') {
-            steps {
-                echo 'Logging in to DockerHub...'
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        sh '''
-                            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                        '''
-                    }
-                }
-            }
-        }
+        //stage('Docker Login') {
+           // steps {
+               // echo 'Logging in to DockerHub...'
+               // script {
+                  //  withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                       // sh '''
+                        /    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                        //'''
+                  //  }
+              //  }
+       //     }
+       // }
 
         stage('Build Docker Image') {
             steps {
@@ -58,16 +58,16 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
-            steps {
-                echo 'Pushing the Docker image to DockerHub...'
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                    }
-                }
-            }
-        }
+        //stage('Push Docker Image') {
+           // steps {
+            //    echo 'Pushing the Docker image to DockerHub...'
+             ///   script {
+             //       withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+             //           sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
+            //        }
+            ////    }
+         ////   }
+     //   }
 
         stage('Run the Container') {
             steps {
