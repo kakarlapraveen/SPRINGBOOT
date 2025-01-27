@@ -11,14 +11,6 @@ pipeline {
         CREDENTIAL = 'docker-hub-credentials'
     }
 
-    stages {
-        stage('Clone Repo') {
-            steps {
-                echo 'Cloning the repository...'
-                git branch: 'main', url: 'https://github.com/punit-appi/SPRINGBOOT.git'
-            }
-        }
-
         stage('Build jar') {
             steps {
                 echo 'Building the JAR file...'
